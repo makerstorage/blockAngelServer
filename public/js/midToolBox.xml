@@ -1,0 +1,54 @@
+<xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
+  
+  <category name="Base frame" colour="#a55b5b">
+   
+    <block type="block_angel_baseframe">
+    <statement name="head">
+      <block type="title">
+        <field name="title">New Page Title</field>
+        <next>
+          <block type="block_angel_style"></block>
+        </next>
+      </block>
+    </statement>
+  </block>
+    
+  
+  </category>
+
+  <category name="Style">
+    <block type="block_angel_style"></block>
+    <block type="block_angel_css_class"></block>
+    <block type="block_angel_genericstyle"></block>
+    <block type="block_angel_css_id"></block>
+    <block type="block_angel_class"></block>
+    <block type="block_angel_css_text_align"></block>
+    <block type="block_angel_css_color"></block>
+  </category>
+  <category name="Basic">
+    <block type="block_angel_text"></block>
+    <block type="block_angel_h1"></block>
+    <block type="block_angel_paragraph"></block>
+    <block type="block_angel_div_with_css"></block>
+    <block type="block_angel_span_with_css"></block>
+    <block type="block_angel_anchor"></block>
+    <block type="block_angel_image"></block>
+  </category>
+  <category name="Panels">
+    <block type="panel1">
+      <field name="caption">Lorem</field>
+      <field name="subtext">Ipsum</field>
+    </block>
+    <block type="video">
+      <field name="src">https://www.youtube.com/embed/tgbNymZ7vqY</field>
+    </block>
+    <block type="glyphiconpanel">
+      <field name="Icon">glyphicon-off</field>
+      <field name="Color">#cc0000</field>
+      <field name="Caption">Power</field>
+      <field name="SubText">Lorem ipsum dolor sit amet..</field>
+    </block>
+  </category>
+
+  
+</xml>
