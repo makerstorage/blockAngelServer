@@ -348,13 +348,10 @@
 
 
     function loadJson(event) {
-      code='...';
-      style='...';
       var rawText = MsHtmlGenerator.workspaceToCode(MakerStorageWorkspace);
       var style = getCSSCode(rawText);
       var code = getHTMLCode(rawText);
-      
-
+  
  
  //    console.log('code: '+code);
 //     console.log('style: '+style);
