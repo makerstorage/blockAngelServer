@@ -2,10 +2,15 @@
 
 ## User Interface Design
 
-- The Web display area must be iframe. Otherwise the code blocks effects to all  page with some ccs tags like body color.
-Iframe may let us to have a zoom in zoom out buttons.
+- ~~Display css and html code in saperate tabs~~
+- ~~The Web display area must be iframe. Otherwise the code blocks effects to all  page with some ccs tags like body color.~~
+- zoom in zoom out buttons.
+- capture as image button
+- download html with saparate files for css and html
 
 - The table borders must be dragable to resize the block, code and web areas.
+
+- classroom module like google class or knowladge tools
 
 
 ## HTML modules
@@ -28,7 +33,7 @@ with selectable combo box.
 
 ## Example code
 
-- We can search the [w3schools](https://www.w3schools.com/) for html and css code examples and we can convert them to blocks.
+- We can search the [w3schools](https://www.w3schools.com/) and [mdn](https://developer.mozilla.org/en-US/docs/Learn) for html and css code examples and we can convert them to blocks.
 
 
 ## Video Tutorials
