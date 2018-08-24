@@ -11,12 +11,6 @@ MsHtmlGenerator.scrub_ = function(block, code) {
 };
 
 
-
-
-
-
-
-
 MsHtmlGenerator['block_angel_baseframe'] = function(block) {
   var statements_head = MsHtmlGenerator.statementToCode(block, 'head');
   var statements_body = MsHtmlGenerator.statementToCode(block, 'body');
@@ -28,11 +22,6 @@ MsHtmlGenerator['block_angel_baseframe'] = function(block) {
 
   return code;
 };
-
-
-
-
-
 
 
 
@@ -220,15 +209,6 @@ MsHtmlGenerator['video'] = function(block) {
   //alert (rendered);
   return rendered;
 };
-
-
-
-
-
-
-
-
-
 
 
 MsHtmlGenerator['panel1'] = function(block) {

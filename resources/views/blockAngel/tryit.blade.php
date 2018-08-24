@@ -5,12 +5,13 @@
   <title>Block Angel</title>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.js"></script>
-  
- 
   <script src="https://cdn.rawgit.com/beautify-web/js-beautify/gh-pages/js/lib/beautify.js"></script>
   <script src="https://cdn.rawgit.com/beautify-web/js-beautify/gh-pages/js/lib/beautify-css.js"></script>
   <script src="https://cdn.rawgit.com/beautify-web/js-beautify/gh-pages/js/lib/beautify-html.js"></script>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
   <script src="/js/blockly_compressed.js"></script>
@@ -60,13 +61,53 @@
     }
    
   </style>
+   <!-- Tab style -->
+  <style>
+    /* Style the tab */
+    .tab {
+        overflow: hidden;
+       /*   border: 1px solid #ccc;
+        background-color: #f1f1f1;*/
+    }
+
+    /* Style the buttons inside the tab */
+    .tab button {
+        background-color: inherit;
+        float: left;
+        border: 1px solid #ccc;
+        outline: none;
+        cursor: pointer;
+       /* padding: 4px 5px;*/
+        transition: 0.3s;
+        font-size: 14px;
+    }
+
+    /* Change background color of buttons on hover */
+    .tab button:hover {
+        background-color: #ddd;
+    }
+
+    /* Create an active/current tablink class */
+    .tab button.active {
+        background-color: #ccc;
+    }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+       /*   padding: 6px 12px;
+       border: 1px solid #ccc; */
+        border-top: none;
+    }
+  </style>
+
 </head>
 <body>
 
 <table border="2">
 <tr>
     <td id="barTitle">
-      <button type="button" id = "saveButton" style="float: right;">Save blockAngel Code</button>
+      
       <span style="margin-left:130px;"><b><a href="/home">bloackAngel</a> &nbsp;&nbsp;&nbsp; </b><b>User:</b>{{$user->name}} 
         <span style="margin: 20px;"><b>   Project Name:</b>@isset($name){{$name}}@endisset</span>
       </span>
@@ -74,42 +115,42 @@
       <button type="button" id = "silButton" style="float: right; display: none;">sil blockAngel Code</button>
   <!--    <input type="file" id="fileButton" style="display: none;" />
       <input type="button" style="float: right;"value="Load blockAngel Code" onclick="document.getElementById('fileButton').click();" />-->
+      <button type="button" style="float: right;" disabled>Publish to Web (coming soon)</button>
+      <button id = "exportButton" style="float: right;" type="button">Download HTML Code</button>
+      <button type="button" id = "saveButton" style="float: right;">Save blockAngel Code</button>
     </td>
-    <td id="navtoolbar"><button id = "exportButton" type="button">Download HTML Code</button><button type="button" disabled>Publish to Web (coming soon)</button></td> 
+    <td id="navtoolbar">
+        <!-- Tab links -->
+        <div class="tab">
+          <button class="tablinks" onclick="openCode(event, 'codeBoxCSS')" >CSS</button>
+          <button class="tablinks" onclick="openCode(event, 'codeBoxHTML')" id="defaultOpen">HTML</button>
+         
+        </div>
+    </td> 
  
 
   </tr>
   <tr>
     <td id="blocklyArea"></td>
-    <td id="codeArea"><div style="height: 300px;white-space: pre-wrap;overflow-y: scroll" id="codeBox"></div></td> 
+    <td id="codeArea">
+      <div style="height: 300px;white-space: pre-wrap;overflow-y: scroll" id="codeBoxHTML" class="tabcontent"></div>
+      <div style="height: 300px;white-space: pre-wrap;overflow-y: scroll" id="codeBoxCSS" class="tabcontent"></div>
+    </td> 
  
 
   </tr>
   <tr>
     
 
-      <td colspan="2" id="webAreaCell"><div style="width:100%; max-height:100%; overflow:auto">
-              <!DOCTYPE HTML><html>
-              <head>
-                <title>Block Angle</title>
-                <meta charset="utf-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1">
-                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-           
-              </head>
-              <body ><div id="target">Loading...</div>
-              </body></html>
-            </div>
+      <td colspan="2" id="webAreaCell">
+        
+              <iframe id="target" style="display:block;  width:100%; height: 100%; "></iframe>
+       
       </td>
   </tr>
 </table>
 
-
-
-
-
+      
   
 
   <div id="blocklyDiv" style="position: absolute"></div>
@@ -245,39 +286,110 @@
       }
 
   */
+    //tab open fuction
+    function openCode(evt, myName) {
+      // Declare all variables
+      var i, tabcontent, tablinks;
+
+      // Get all elements with class="tabcontent" and hide them
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+          tabcontent[i].style.display = "none";
+      }
+
+      // Get all elements with class="tablinks" and remove the class "active"
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+          tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+
+      // Show the current tab, and add an "active" class to the button that opened the tab
+      document.getElementById(myName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }  
+
+    document.getElementById("defaultOpen").click(); //open html as default
+
     
-     
+    function getHTMLCode(allCode){
+      
+         
+      var inComming = allCode.split('<style>');
+      var code1 = inComming[0];
+      inComming = allCode.split('</style>');
+      var code2 = inComming[1];
+
+      if (code1==null){
+        code1='';
+      }
+      if (code2==null){
+        code2='';
+      }
+      return code1 + code2;
+
+    }
+
+    function getCSSCode(allCode){
+         
+      
+      var inComming = allCode.split('<style>');
+      code1 = inComming[1];
+      if (code1!=null){
+        inComming = code1.split('</style>');
+      }
+      
+      if (inComming[0]==null){
+        inComming[0]='';
+      }
+      return inComming[0];
+
+    }
+
+
 
     function loadJson(event) {
-
-      
-      
+      code='...';
+      style='...';
       var rawText = MsHtmlGenerator.workspaceToCode(MakerStorageWorkspace);
-
-      console.log(rawText);
-       
-      var inComming = rawText.split('***');
-
-      var code = inComming[0];
-      
-      var style = inComming[1];
-
-
-      document.getElementById("target").innerHTML = code;
-
-     var output = html_beautify(code,{ "preserve_newlines": "true", "wrap_line_length": "0","end_with_newline": "true" });
-
+      var style = getCSSCode(rawText);
+      var code = getHTMLCode(rawText);
       
 
+ 
+ //    console.log('code: '+code);
+//     console.log('style: '+style);
+            
 
+      // append HTML to real purpose to target
+      document.getElementById('target').srcdoc =rawText;
+     //  document.getElementById("target").innerHTML = code;
+  
+
+
+        // apply style on the fly to the document
+    //  var myDocumentStyle = document.createElement('style');
+    //  myDocumentStyle.type = 'text/css';
+    //  myDocumentStyle.innerHTML = outputCSS;
+    //  document.getElementById("target").setAttribute("style",'style="'+style+'"');
+
+      // make it beauitfull
+      var outputHTML = html_beautify(code,{ "preserve_newlines": "true", "wrap_line_length": "0","end_with_newline": "true" });
+      var outputCSS = css_beautify(style,{ "preserve_newlines": "true", "wrap_line_length": "0","end_with_newline": "true" });
+
+      // append to divs
+      document.getElementById('codeBoxHTML').textContent = outputHTML ;
+      document.getElementById('codeBoxCSS').textContent = outputCSS;
       
-      document.getElementById('codeBox').textContent = output ;
+      // make it colorful
+      w3CodeColor(document.getElementById("codeBoxHTML"),'html');
+      w3CodeColor(document.getElementById("codeBoxCSS"),'css');
 
-      w3CodeColor(document.getElementById("codeBox"));
-
+     // local storage to continue where you left
      // var xml = Blockly.Xml.workspaceToDom(MakerStorageWorkspace);
      // var xml_text = Blockly.Xml.domToText(xml);
      // localStorage.setItem('blockly-html-code', xml_text);
+
+
 
       
     }
