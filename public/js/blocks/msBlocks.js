@@ -142,6 +142,22 @@ Blockly.Blocks['block_angel_css_fontsize'] = {
   }
 };
 
+
+Blockly.Blocks['block_angel_css_link'] = {
+  init: function() {
+    this.appendDummyInput()
+        .appendField("Link stylesheet");
+    this.appendDummyInput()
+        .appendField(new Blockly.FieldTextInput("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"), "NAME");
+    this.setPreviousStatement(true, null);
+    this.setNextStatement(true, null);
+    this.setColour(105);
+ this.setTooltip("");
+ this.setHelpUrl("");
+  }
+};
+
+
 //style son
 
 Blockly.Blocks['block_angel_paragraph'] = {

@@ -108,6 +108,13 @@ MsHtmlGenerator['block_angel_css_fontsize'] = function(block) {
   return code;
 };
 
+MsHtmlGenerator['block_angel_css_link'] = function(block) {
+  var text_name = block.getFieldValue('NAME');
+  // TODO: Assemble JavaScript into code variable.
+  var code = `<link rel="stylesheet" type="text/css" href="${text_name}">\n`;
+  return code;
+};
+
 //style son
 
 

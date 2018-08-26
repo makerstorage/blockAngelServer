@@ -12,6 +12,10 @@
   <script src="https://cdn.rawgit.com/beautify-web/js-beautify/gh-pages/js/lib/beautify-css.js"></script>
   <script src="https://cdn.rawgit.com/beautify-web/js-beautify/gh-pages/js/lib/beautify-html.js"></script>
 
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
 
   <script src="/js/blockly_compressed.js"></script>
   <script src="/js/javascript_compressed.js"></script>
@@ -88,20 +92,10 @@
   <tr>
     
 
-      <td colspan="2" id="webAreaCell"><div style="width:100%; max-height:100%; overflow:auto">
-              <!DOCTYPE HTML><html>
-              <head>
-                <title>Block Angle</title>
-                <meta charset="utf-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1">
-                <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-                <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-                <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-           
-              </head>
-              <body ><div id="target">Loading...</div>
-              </body></html>
-            </div>
+      <td colspan="2" id="webAreaCell">
+
+        <iframe id="target" style="display:block;  width:100%; height: 100%; "></iframe>
+      
       </td>
   </tr>
 </table>
@@ -135,6 +129,8 @@
   <category name="Style" colour="#339933">
     <block type="block_angel_style"></block>
     <block type="block_angel_css_class"></block>
+    <block type="block_angel_css_link"></block>
+   
     <block type="block_angel_genericstyle"></block>
     <block type="block_angel_css_id"></block>
     <block type="block_angel_class"></block>
@@ -254,23 +250,13 @@
       
       var rawText = MsHtmlGenerator.workspaceToCode(MakerStorageWorkspace);
 
-      console.log(rawText);
-       
-      var inComming = rawText.split('***');
-
-      var code = inComming[0];
-      
-      var style = inComming[1];
+      document.getElementById('target').srcdoc =rawText;
 
 
-      document.getElementById("target").innerHTML = code;
+      document.getElementById("target").innerHTML = rawText;
 
-     var output = html_beautify(code,{ "preserve_newlines": "true", "wrap_line_length": "0","end_with_newline": "true" });
-
-      
-
-
-      
+      var output = html_beautify(rawText,{ "preserve_newlines": "true", "wrap_line_length": "0","end_with_newline": "true" });
+     
       document.getElementById('codeBox').textContent = output ;
 
       w3CodeColor(document.getElementById("codeBox"));
