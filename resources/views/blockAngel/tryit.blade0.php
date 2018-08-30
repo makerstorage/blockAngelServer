@@ -2,19 +2,21 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Block Angel</title>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js" type="text/javascript" charset="utf-8"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/mode-html.js" type="text/javascript" charset="utf-8"></script>
+  
+  
  
   <script src="https://cdn.rawgit.com/beautify-web/js-beautify/gh-pages/js/lib/beautify.js"></script>
   <script src="https://cdn.rawgit.com/beautify-web/js-beautify/gh-pages/js/lib/beautify-css.js"></script>
   <script src="https://cdn.rawgit.com/beautify-web/js-beautify/gh-pages/js/lib/beautify-html.js"></script>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
@@ -29,56 +31,118 @@
   <script src="/js/w3CodeColor.js"></script>
   
   <script src="/js/msg/en.js"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
 
-    
-    <link rel="stylesheet" href="/css/Footer-Basic.css" />
-    <link rel="stylesheet" href="/css/Navigation-Clean.css" />
-    <link rel="stylesheet" href="/css/styles.css" />
+    table{
+      width:100%;
+    }
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+    #codeArea { 
+      height:50%;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+    /* Style the tab */
+.tab {
 
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  
+    border: 1px solid #ccc;
+    border-top: none;
+}
+   
+  </style>
 </head>
 <body>
 
-    <div>
-        <nav class="navbar navbar-light navbar-expand-md navigation-clean" style="padding:5px;">
-            <div class="container"><a class="navbar-brand" href="#" style="color:rgb(64,97,183);">blockAngel</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                <div
-                    class="collapse navbar-collapse" id="navcol-1"><span class="navbar-text" style="margin-left:100px;font-size:14px;"><strong>User:</strong>{{$user->name}}</span><span class="navbar-text" style="margin-left:30px;font-size:14px;"><strong>Project Name:</strong>@isset($name){{$name}}@endisset</span>
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Menu&nbsp;</a>
-                            <div class="dropdown-menu" role="menu"><a class="dropdown-item" id = "silButton" role="presentation" href="#">Download XML</a><a class="dropdown-item" id = "saveButton" role="presentation" href="#">Save blockAngel Code</a><a class="dropdown-item" id = "exportButton" role="presentation" href="#">Download HTML Code</a><a class="dropdown-item"  role="presentation" href="#">Publish to WEB (coming soon)</a></div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </div>
-    <div class="container">
-        <div>
-            <ul class="nav nav-tabs">
-                <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#blocklyArea">Blocks</a></li>
-                <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#codeArea">HTML</a></li>
-            </ul>
-            <div class="tab-content" >
-                <div class="tab-pane active" style="height:400px;" role="tabpanel" id="blocklyArea">
-                    
-                       
-                        <div id="blocklyDiv" style="position: absolute"></div>
-                    
-                </div>
-                <div class="tab-pane" style="height:400px;" role="tabpanel" id="codeArea">
-                  
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div class="container" style="height:300px;">  <iframe id="target" style="display:block;  width:100%; height:100%;" scrolling="yes"></iframe> </div>
+<table border="2">
+<tr>
+    <td id="barTitle">
+      <button type="button" id = "saveButton" style="float: right;">Save blockAngel Code</button>
+      <span style="margin-left:130px;"><b><a href="/home">bloackAngel</a> &nbsp;&nbsp;&nbsp; </b><b>User:</b>{{$user->name}} 
+        <span style="margin: 20px;"><b>   Project Name:</b>@isset($name){{$name}}@endisset</span>
+      </span>
+      
+      <button type="button" id = "silButton" style="float: right; display: none;">sil blockAngel Code</button>
+  <!--    <input type="file" id="fileButton" style="display: none;" />
+      <input type="button" style="float: right;"value="Load blockAngel Code" onclick="document.getElementById('fileButton').click();" />-->
+    </td>
+    <td id="navtoolbar"><button id = "exportButton" type="button">Download HTML Code</button><button type="button" disabled>Publish to Web (coming soon)</button></td> 
+ 
 
-    <div class="container footer-basic" style="height:30px;padding:5px;">
-        <footer>
-            <p class="copyright" style="margin-top:5px;background-color:#efeeee;">MakerStorage LLC. &nbsp;© 2018</p>
-        </footer>
+</tr>
+</table>
+
+
+<table border="2">
+<tr>
+  <div style="margin:10px;"class="tab">
+    <button class="tablinks active" onclick="openTabs(event, 'blocklyArea')" id="defaultOpen">Blocks</button>
+    <button class="tablinks" onclick="openTabs(event, 'codeArea')">HTML</button>
+    
+  </div>
+
+      <div style="height:50%;" id="blocklyArea" class="tabcontent">
+       
+       <div id="blocklyDiv" style="position: absolute"></div>
     </div>
+
+
+    <div id="codeArea" class="tabcontent">
+    </div>
+
+  
+    
+  </tr>
+</table>   
+<table border="2">
+<tr>
+
+        <iframe id="target" style="display:block;  width:100%; height: 50%;" scrolling="yes"></iframe>
+
+  </tr>
+</table>   
 
 <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
   
@@ -184,18 +248,15 @@
         y += element.offsetTop;
         element = element.offsetParent;
       } while (element);
-
-
       // Position blocklyDiv over blocklyArea.
       blocklyDiv.style.left = x + 'px';
-      blocklyDiv.style.top = y + 'px';  
+      blocklyDiv.style.top = y + 'px';
       blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
       blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
-      Blockly.svgResize(MakerStorageWorkspace);
     };
     window.addEventListener('resize', onresize, false);
     onresize();
-    
+    Blockly.svgResize(MakerStorageWorkspace);
     
     var myCode = '{!! $code !!}';
     var myXml = Blockly.Xml.textToDom(myCode);
@@ -317,8 +378,28 @@
   </script>
 
  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/js/bootstrap.bundle.min.js"></script>
+  <script>
+  //tabs
+function openTabs(evt, tabName) {
+    var i, tabcontent, tablinks;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+    }
+    tablinks = document.getElementsByClassName("tablinks");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+    }
+    document.getElementById(tabName).style.display = "block";
+    evt.currentTarget.className += " active";
+}
+
+document.getElementById("defaultOpen").click();
+
+
+
+
+</script>
 
 
   

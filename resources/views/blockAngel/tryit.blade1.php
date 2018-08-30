@@ -2,19 +2,21 @@
 <html>
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Block Angel</title>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
  
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js" type="text/javascript" charset="utf-8"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/mode-html.js" type="text/javascript" charset="utf-8"></script>
+  
+  
  
   <script src="https://cdn.rawgit.com/beautify-web/js-beautify/gh-pages/js/lib/beautify.js"></script>
   <script src="https://cdn.rawgit.com/beautify-web/js-beautify/gh-pages/js/lib/beautify-css.js"></script>
   <script src="https://cdn.rawgit.com/beautify-web/js-beautify/gh-pages/js/lib/beautify-html.js"></script>
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
@@ -29,56 +31,126 @@
   <script src="/js/w3CodeColor.js"></script>
   
   <script src="/js/msg/en.js"></script>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
 
-    
-    <link rel="stylesheet" href="/css/Footer-Basic.css" />
-    <link rel="stylesheet" href="/css/Navigation-Clean.css" />
-    <link rel="stylesheet" href="/css/styles.css" />
+    table{
+      width:100%;
+    }
+    body {
+      background-color: #fff;
+      font-family: sans-serif;
+      overflow: hidden;
+    }
+    h1 {
+      font-weight: normal;
+      font-size: 140%;
+    }
+    #codeArea { 
+      height:50%;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+    }
+    /* Style the tab */
+.tab {
 
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+}
+
+/* Style the buttons inside the tab */
+.tab button {
+    background-color: inherit;
+
+    border: none;
+    outline: none;
+    cursor: pointer;
+
+    transition: 0.3s;
+    font-size: 14px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+    background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+    background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  
+    border: 1px solid #ccc;
+    border-top: none;
+}
+   
+  </style>
 </head>
 <body>
 
-    <div>
-        <nav class="navbar navbar-light navbar-expand-md navigation-clean" style="padding:5px;">
-            <div class="container"><a class="navbar-brand" href="#" style="color:rgb(64,97,183);">blockAngel</a><button class="navbar-toggler" data-toggle="collapse" data-target="#navcol-1"><span class="sr-only">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
-                <div
-                    class="collapse navbar-collapse" id="navcol-1"><span class="navbar-text" style="margin-left:100px;font-size:14px;"><strong>User:</strong>{{$user->name}}</span><span class="navbar-text" style="margin-left:30px;font-size:14px;"><strong>Project Name:</strong>@isset($name){{$name}}@endisset</span>
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="dropdown"><a class="dropdown-toggle nav-link dropdown-toggle" data-toggle="dropdown" aria-expanded="false" href="#">Menu&nbsp;</a>
-                            <div class="dropdown-menu" role="menu"><a class="dropdown-item" id = "silButton" role="presentation" href="#">Download XML</a><a class="dropdown-item" id = "saveButton" role="presentation" href="#">Save blockAngel Code</a><a class="dropdown-item" id = "exportButton" role="presentation" href="#">Download HTML Code</a><a class="dropdown-item"  role="presentation" href="#">Publish to WEB (coming soon)</a></div>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-6">
+                    <button type="button" id = "saveButton" style="float: right;">Save blockAngel Code</button>
+                    <span style="margin-left:130px;"><b><a href="/home">bloackAngel</a> &nbsp;&nbsp;&nbsp; </b><b>User:</b>{{$user->name}} 
+                      <span style="margin: 20px;"><b>   Project Name:</b>@isset($name){{$name}}@endisset</span>
+                    </span>
+                    <button type="button" id = "silButton" style="float: right; display: none;">sil blockAngel Code</button>
     </div>
-    <div class="container">
-        <div>
-            <ul class="nav nav-tabs">
-                <li class="nav-item"><a class="nav-link active" role="tab" data-toggle="tab" href="#blocklyArea">Blocks</a></li>
-                <li class="nav-item"><a class="nav-link" role="tab" data-toggle="tab" href="#codeArea">HTML</a></li>
-            </ul>
-            <div class="tab-content" >
-                <div class="tab-pane active" style="height:400px;" role="tabpanel" id="blocklyArea">
-                    
-                       
-                        <div id="blocklyDiv" style="position: absolute"></div>
-                    
-                </div>
-                <div class="tab-pane" style="height:400px;" role="tabpanel" id="codeArea">
-                  
-                </div>
-            </div>
+    <div class="col-md-6">
+                    <button id = "exportButton" type="button">Download HTML Code</button><button type="button" disabled>Publish to Web (coming soon)</button>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="tabbable" id="tabs-386810">
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link active show" href="#blocklyArea" data-toggle="tab">Blocks</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link " href="#codeArea" data-toggle="tab">HTML</a>
+          </li>
+        </ul>
+        <div class="tab-content" style="width:100%; height: 400px;">
+                    <div style="width:100%; height:100%;" id="blocklyArea" class="tab-pane active" >
+                     
+                     <div id="blocklyDiv" style="position: absolute"></div>
+                    </div>
+                    <div  style="width:100%; height:100%;" id="codeArea" class="tab-pane" >
+                      
+                    </div>
         </div>
+      </div>
     </div>
-    
-    <div class="container" style="height:300px;">  <iframe id="target" style="display:block;  width:100%; height:100%;" scrolling="yes"></iframe> </div>
+  </div>
+  <div class="row">
+    <div class="col-md-12" style="height:calc(100vh-30px);">
+                    <iframe id="target" style="display:block;  width:100%; height:100%;" scrolling="yes"></iframe> 
+    </div>
+  </div>
+  <div class="row">
+    <!-- Footer -->
+              <footer class="page-footer font-small blue">
 
-    <div class="container footer-basic" style="height:30px;padding:5px;">
-        <footer>
-            <p class="copyright" style="margin-top:5px;background-color:#efeeee;">MakerStorage LLC. &nbsp;© 2018</p>
-        </footer>
-    </div>
+                <!-- Copyright -->
+                <div class="footer-copyright text-center py-3">© 2018 Copyright:
+                  <a href="https://www.makerstorage.com"> MakerStorage LLC.</a>
+                </div>
+                <!-- Copyright -->
+
+              </footer>
+              <!-- Footer -->
+  </div>
+</div>
 
 <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
   
@@ -188,7 +260,7 @@
 
       // Position blocklyDiv over blocklyArea.
       blocklyDiv.style.left = x + 'px';
-      blocklyDiv.style.top = y + 'px';  
+      blocklyDiv.style.top = y-25 + 'px';  //25 ben ekledim
       blocklyDiv.style.width = blocklyArea.offsetWidth + 'px';
       blocklyDiv.style.height = blocklyArea.offsetHeight + 'px';
       Blockly.svgResize(MakerStorageWorkspace);
@@ -317,8 +389,13 @@
   </script>
 
  
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.2/js/bootstrap.bundle.min.js"></script>
+  <script>
+
+
+
+
+
+</script>
 
 
   
